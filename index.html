@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>López Aliaga: Las Polémicas del Alcalde de Lima</title>
+  <style>
+    :root {
+      --celeste:    #0096D6;
+      --celeste-dark: #0077B6;
+      --celeste-light: #E0F4FD;
+      --rojo:       #E63946;
+      --gris:       #1a1a2e;
+      --gris-medio: #4a4a6a;
+      --blanco:     #ffffff;
+      --fondo:      #f0f8ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--fondo);
+      color: var(--gris);
+      line-height: 1.6;
+    }
+
+    /* ── HERO ── */
+    header {
+      background: linear-gradient(135deg, var(--celeste-dark) 0%, var(--celeste) 100%);
+      color: var(--blanco);
+      text-align: center;
+      padding: 48px 20px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: var(--blanco);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    header h1 {
+      font-size: clamp(1.6rem, 6vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    header h1 span { color: #FFD700; }
+    header p {
+      font-size: clamp(0.9rem, 3.5vw, 1.05rem);
+      opacity: 0.9;
+      max-width: 480px;
+      margin: 0 auto 24px;
+    }
+    .stat-bar {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .stat {
+      background: rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 10px 20px;
+      text-align: center;
+    }
+    .stat strong { display: block; font-size: 1.5rem; font-weight: 800; }
+    .stat span   { font-size: 0.72rem; opacity: 0.85; letter-spacing: 0.5px; }
+
+    /* ── INTRO BANNER ── */
+    .intro-banner {
+      background: var(--rojo);
+      color: var(--blanco);
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── CONTAINER ── */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      text-align: center;
+      padding: 36px 20px 8px;
+    }
+    .section-title h2 {
+      font-size: clamp(1.2rem, 5vw, 1.6rem);
+      font-weight: 800;
+      color: var(--celeste-dark);
+    }
+    .section-title p {
+      font-size: 0.85rem;
+      color: var(--gris-medio);
+      margin-top: 6px;
+    }
+
+    /* ── POLÉMICA CARD ── */
+    .cards { padding: 20px 0 40px; display: flex; flex-direction: column; gap: 18px; }
+
+    .card {
+      background: var(--blanco);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-left: 5px solid var(--celeste);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .card:active { transform: scale(0.99); }
+
+    .card-rank {
+      background: linear-gradient(135deg, var(--celeste-dark), var(--celeste));
+      color: var(--blanco);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-rank .num {
+      background: rgba(255,255,255,0.25);
+      border-radius: 50%;
+      width: 22px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 900;
+      flex-shrink: 0;
+    }
+    .card-rank.alta  { background: linear-gradient(135deg, #c0392b, #e74c3c); }
+    .card-rank.media { background: linear-gradient(135deg, #d35400, #e67e22); }
+    .card-rank.baja  { background: linear-gradient(135deg, var(--celeste-dark), var(--celeste)); }
+
+    .card-body { padding: 16px 18px 18px; }
+    .card-body h3 {
+      font-size: clamp(0.95rem, 3.8vw, 1.1rem);
+      font-weight: 800;
+      color: var(--gris);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .card-body p {
+      font-size: 0.875rem;
+      color: var(--gris-medio);
+      line-height: 1.65;
+    }
+    .card-body p strong { color: var(--gris); }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+    .tag.corrupcion { background: #fdecea; color: #c0392b; }
+    .tag.gestion    { background: #e8f4fd; color: var(--celeste-dark); }
+    .tag.obras      { background: #fff3e0; color: #d35400; }
+    .tag.contratos  { background: #f3e5f5; color: #7b1fa2; }
+    .tag.etico      { background: #e8f5e9; color: #2e7d32; }
+    .tag.legal      { background: #fff8e1; color: #f57f17; }
+
+    .source-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.72rem;
+      color: var(--celeste);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px dashed var(--celeste);
+    }
+
+    /* ── TIMELINE DIVIDER ── */
+    .timeline-label {
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--celeste-dark);
+      padding: 10px 0 4px;
+      position: relative;
+    }
+    .timeline-label::before, .timeline-label::after {
+      content: '';
+      position: absolute;
+      top: 50%; width: 25%;
+      height: 1px;
+      background: var(--celeste-light);
+    }
+    .timeline-label::before { left: 8%; }
+    .timeline-label::after  { right: 8%; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--gris);
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 0.75rem;
+      line-height: 1.7;
+    }
+    footer strong { color: rgba(255,255,255,0.8); }
+    footer .disclaimer {
+      background: rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 12px auto 0;
+      max-width: 500px;
+      font-size: 0.7rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header>
+  <div class="badge">Gestión Municipal · Lima 2023–2026</div>
+  <h1>Rafael López Aliaga:<br><span>Las Polémicas del Alcalde</span></h1>
+  <p>Controversias, escándalos y cuestionamientos documentados durante su gestión al frente de la Municipalidad de Lima.</p>
+  <div class="stat-bar">
+    <div class="stat"><strong>+2</strong><span>años en el cargo</span></div>
+    <div class="stat"><strong>+10</strong><span>polémicas mayores</span></div>
+    <div class="stat"><strong>Miles</strong><span>de millones en contratos</span></div>
+  </div>
+</header>
+
+<div class="intro-banner">
+  ⚠ Información basada en reportes periodísticos y fuentes públicas verificables
+</div>
+
+<!-- ══ CARDS ══ -->
+<div class="container">
+
+  <div class="section-title">
+    <h2>Ordenadas por gravedad e impacto</h2>
+    <p>De las más graves a las menos conocidas</p>
+  </div>
+
+  <div class="cards">
+
+    <!-- 1 -->
+    <div class="card">
+      <div class="card-rank alta">
+        <div class="num">1</div>
+        Crítica · Mayor impacto
+      </div>
+      <div class="card-body">
+        <h3>Paralización del Metro de Lima y obras millonarias abandonadas</h3>
+        <p>Durante su gestión se registraron <strong>retrasos y paralizaciones en obras de infraestructura vial</strong> heredadas y nuevas, con contratos cuestionados por la Contraloría General de la República. El municipio fue observado por adendas que incrementaban costos sin justificación técnica suficiente.</p>
+        <div class="tag-row">
+          <span class="tag obras">Obras públicas</span>
+          <span class="tag contratos">Contratos</span>
+          <span class="tag legal">Contraloría</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <div class="card-rank alta">
+        <div class="num">2</div>
+        Crítica · Conflicto de intereses
+      </div>
+      <div class="card-body">
+        <h3>Nexos empresariales y posibles conflictos de interés</h3>
+        <p>López Aliaga declaró un patrimonio de <strong>más de 200 millones de dólares</strong> antes de asumir. Investigaciones periodísticas señalaron que empresas vinculadas a su grupo económico o a socios cercanos participaron en licitaciones o se vieron favorecidas por decisiones municipales, generando cuestionamientos éticos sobre posibles conflictos de interés.</p>
+        <div class="tag-row">
+          <span class="tag corrupcion">Conflicto de interés</span>
+          <span class="tag contratos">Licitaciones</span>
+          <span class="tag etico">Ética pública</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <div class="card-rank alta">
+        <div class="num">3</div>
+        Crítica · Uso de recursos públicos
+      </div>
+      <div class="card-body">
+        <h3>Cuestionamientos por viajes y gastos de representación</h3>
+        <p>La Contraloría y medios de comunicación observaron <strong>viajes al exterior y gastos de representación</strong> del alcalde y su entorno, cuestionando su pertinencia y costo. Se reportaron comitivas numerosas financiadas con fondos municipales en viajes cuyo impacto para Lima no quedó claro.</p>
+        <div class="tag-row">
+          <span class="tag corrupcion">Fondos públicos</span>
+          <span class="tag gestion">Gestión</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="timeline-label">Polémicas de gestión</div>
+
+    <!-- 4 -->
+    <div class="card">
+      <div class="card-rank media">
+        <div class="num">4</div>
+        Alta · Gestión del transporte
+      </div>
+      <div class="card-body">
+        <h3>Caos en el transporte público: promesas incumplidas</h3>
+        <p>Prometió en campaña <strong>reformar radicalmente el transporte en Lima</strong> en sus primeros meses. Dos años después, el caos vehicular, los accidentes de tránsito y la informalidad del transporte se mantuvieron o agudizaron. Los corredores complementarios siguieron sin solución estructural y el Metropolitano operó con déficit de flota.</p>
+        <div class="tag-row">
+          <span class="tag gestion">Gestión</span>
+          <span class="tag obras">Transporte</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <div class="card-rank media">
+        <div class="num">5</div>
+        Alta · Seguridad ciudadana
+      </div>
+      <div class="card-body">
+        <h3>Fracaso del plan de seguridad y serenazgo cuestionado</h3>
+        <p>Lima siguió siendo una de las ciudades con <strong>mayor percepción de inseguridad</strong> del país durante su gestión. Las promesas de reforzar el serenazgo y la videovigilancia avanzaron con lentitud, mientras los contratos de equipamiento fueron observados por la Contraloría por sobrevaluación.</p>
+        <div class="tag-row">
+          <span class="tag gestion">Seguridad</span>
+          <span class="tag contratos">Contratos</span>
+          <span class="tag legal">Contraloría</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+      <div class="card-rank media">
+        <div class="num">6</div>
+        Alta · Transparencia
+      </div>
+      <div class="card-body">
+        <h3>Opacidad en la contratación de funcionarios de confianza</h3>
+        <p>Medios denunciaron que varios <strong>gerentes y funcionarios de confianza</strong> del municipio carecían del perfil técnico requerido o tenían vínculos directos con el alcalde o su partido, cuestionando los procesos de selección y la idoneidad de la gestión.</p>
+        <div class="tag-row">
+          <span class="tag etico">Nepotismo</span>
+          <span class="tag gestion">Gestión</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="timeline-label">Polémicas institucionales y declaraciones</div>
+
+    <!-- 7 -->
+    <div class="card">
+      <div class="card-rank media">
+        <div class="num">7</div>
+        Media · Conflicto institucional
+      </div>
+      <div class="card-body">
+        <h3>Confrontaciones permanentes con el Concejo Metropolitano</h3>
+        <p>Su relación con el Concejo Municipal fue constantemente tensa. Regidores de oposición denunciaron <strong>bloqueos de información, negativa a rendir cuentas</strong> y uso de mayorías para aprobar partidas cuestionadas. El municipio fue observado varias veces por no cumplir plazos de transparencia.</p>
+        <div class="tag-row">
+          <span class="tag gestion">Institucional</span>
+          <span class="tag etico">Transparencia</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="card">
+      <div class="card-rank media">
+        <div class="num">8</div>
+        Media · Declaraciones polémicas
+      </div>
+      <div class="card-body">
+        <h3>Declaraciones misóginas, homofóbicas y confrontacionales</h3>
+        <p>A lo largo de su gestión, López Aliaga acumuló <strong>declaraciones públicas que generaron rechazo social</strong>: comentarios despectivos sobre mujeres, ataques a la comunidad LGBTQ+, insultos a periodistas y enfrentamientos verbales con otros funcionarios, dañando la imagen institucional del municipio.</p>
+        <div class="tag-row">
+          <span class="tag etico">Ética</span>
+          <span class="tag gestion">Imagen pública</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="card">
+      <div class="card-rank baja">
+        <div class="num">9</div>
+        Media · Medio ambiente
+      </div>
+      <div class="card-body">
+        <h3>Parques y áreas verdes: retroceso y concesiones cuestionadas</h3>
+        <p>Organizaciones vecinales y ambientalistas denunciaron <strong>contratos de concesión de parques metropolitanos</strong> con empresas privadas en condiciones desfavorables para el municipio, así como reducción presupuestaria para el mantenimiento de áreas verdes en distritos populares.</p>
+        <div class="tag-row">
+          <span class="tag obras">Medio ambiente</span>
+          <span class="tag contratos">Concesiones</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="card">
+      <div class="card-rank baja">
+        <div class="num">10</div>
+        Menor difusión · Cultura
+      </div>
+      <div class="card-body">
+        <h3>Recorte a la cultura y cierre de espacios públicos</h3>
+        <p>Menos difundido pero registrado: <strong>recortes presupuestarios a programas culturales</strong> de la Municipalidad de Lima, restricción del uso de espacios públicos para manifestaciones y eventos culturales, y cuestionamientos a la gestión de recintos como el Gran Teatro Nacional bajo su órbita de influencia.</p>
+        <div class="tag-row">
+          <span class="tag gestion">Cultura</span>
+          <span class="tag etico">Derechos ciudadanos</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /cards -->
+</div><!-- /container -->
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <strong>Lima merece una gestión transparente y eficiente</strong>
+  <div class="disclaimer">
+    Esta página recopila información de dominio público basada en reportes de medios periodísticos peruanos
+    (El Comercio, La República, Ojo Público, IDL-Reporteros, entre otros) e informes de la Contraloría General
+    de la República. No pretende reemplazar el seguimiento periodístico especializado.
+    Los hechos descritos son alegaciones e investigaciones en curso o concluidas.
+  </div>
+  <p style="margin-top:14px;">Actualizado: marzo 2026 &nbsp;·&nbsp; Información ciudadana</p>
+</footer>
+
+</body>
+</html>
