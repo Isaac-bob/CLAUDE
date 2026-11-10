@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* ───────── Tokens de marca Síntesis (ver /marca) ───────── */
+@theme {
+  /* Azul marino del logotipo, con su escala */
+  --color-navy-50: #f2f2f9;
+  --color-navy-100: #e3e3f1;
+  --color-navy-200: #c5c5e2;
+  --color-navy-300: #9696c6;
+  --color-navy-400: #5f5fa3;
+  --color-navy-500: #3a3a85;
+  --color-navy-600: #222270;
+  --color-navy-700: #15154f;
+  --color-navy-800: #0a0a4d;
+  --color-navy-900: #01003e;
+  --color-navy-950: #000027;
+  /* Dorado de acento */
+  --color-gold-100: #f6eedb;
+  --color-gold-300: #e6cf8f;
+  --color-gold-500: #c9a03a;
+  --color-gold-600: #a88027;
+  /* Neutros */
+  --color-ink: #14142b;
+  --color-muted: #5c5e78;
+  --color-line: #e4e5f0;
+  --color-canvas: #f7f7fb;
+  /* Estados */
+  --color-danger-50: #fdf0ef;
+  --color-danger-200: #f6c3bf;
+  --color-danger-600: #b3261e;
+  --color-danger-700: #98201a;
+  --color-danger-800: #7a1a15;
+  --color-success-50: #eef7f1;
+  --color-success-200: #b9dec6;
+  --color-success-700: #1e7b4f;
+  --color-success-900: #12492f;
+
+  --font-serif: Georgia, "Times New Roman", "Liberation Serif", serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --shadow-soft: 0 1px 2px rgb(1 0 62 / 0.05), 0 10px 28px -14px rgb(1 0 62 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(1 0 62 / 0.06), 0 22px 44px -18px rgb(1 0 62 / 0.35);
+  --radius-card: 1.25rem;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+  h1, h2 { letter-spacing: -0.01em; }
+  :focus-visible {
+    outline: 3px solid var(--color-gold-500);
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+}
+
+@utility card {
+  @apply rounded-[var(--radius-card)] bg-white shadow-[var(--shadow-soft)] ring-1 ring-navy-900/5;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 active:scale-[0.98];
+}
+@utility btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 active:scale-[0.98] bg-navy-900 text-white shadow-md shadow-navy-900/25 hover:bg-navy-800 hover:shadow-lg;
+}
+@utility btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 active:scale-[0.98] bg-white text-ink ring-1 ring-navy-900/10 hover:bg-navy-50;
+}
+@utility field {
+  @apply w-full rounded-xl border border-navy-900/10 bg-white px-4 py-2.5 text-[15px] text-ink placeholder:text-slate-400 transition focus:border-navy-500 focus:outline-none focus:ring-4 focus:ring-navy-500/15;
+}
+@utility label {
+  @apply mb-1.5 block text-sm font-semibold text-ink;
+}
+@utility hint {
+  @apply mt-1.5 text-xs text-muted;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
